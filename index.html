@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>index.html</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="weblib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    
+    <style>
+		textarea, .textareaClone {
+    		min-height: 8em;
+		}
+	</style>
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">DEV TOOLS</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">主页</a></li>
+                <li><a href="#util">工具</a></li>
+                <li><a href="#about">关于</a></li>
+                <!-- 
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+                 -->
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- SideBar -->
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="./">字符替换</a></li>
+            </ul>
+        </div>
+
+        <!-- Page -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        	<!-- 示例 -->
+            <div class="col-xs-12"><h1 class="page-header">示例</h1></div>
+        	<div id="usage">
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <p class="well">大家好，我是<code>$1</code>，我喜欢<code>$2</code>。</p>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 pager">
+                <p class="glyphicon glyphicon-plus-sign"></p>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <div class="well">
+                    <p><code>$1:</code><kbd>张三 李四</kbd></p>
+                    <p><code>$2:</code><kbd>打球 踢毽子</kbd></p>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 pager">
+                <p class="glyphicon glyphicon-forward"></p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="well">
+                    <p>大家好，我是<kbd>张三</kbd>，我喜欢<kbd>打球</kbd>。</p>
+                    <p>大家好，我是<kbd>李四</kbd>，我喜欢<kbd>踢毽子</kbd>。</p>
+                </div>
+            </div>
+			</div>
+			
+			<!-- 使用 -->
+            <div class="col-xs-12"><h2 class="sub-header">使用</h2></div>
+            
+            <div id="tool">
+			<div id="tool-body" class="list-group">
+            </div>
+            <button id="addModel" type="button" class="btn btn-success btn-sm btn-block">增加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="weblib/backbone/underscore-1.6.0.js"></script>
+<script type="text/javascript" src="weblib/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="weblib/jquery/jquery_expanding.js"></script>
+<script type="text/javascript" src="weblib/backbone/backbone-1.1.0.js"></script>
+<script type="text/javascript" src="weblib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+
+<script type="text/template" id="regex_tpl">
+                        <div class="col-xs-2">
+                            <span class="badge"><%= key %></span>
+                        </div>
+                        <div class="col-xs-10">
+                            <textarea name="regex" class="form-control" rows="3" style="width:260;overflow-y:visible;" placeholder="Apple America Another" mytool-data-for="<%= key %>"><%= val %></textarea>
+                        </div>
+</script>
+
+<script type="text/template" id="char_tpl">
+		<div id="char_replace" class="alert alert-warning col-xs-12 col-sm-12 col-md-12">
+    		<div class="col-xs-3 col-sm-3 col-md-3">
+                <textarea id="ori-text" class="form-control" rows="3" 
+                          placeholder="示例：A for $1, B for $2, A for $1"></textarea>
+            </div>
+            <div id="plus" class="col-xs-1 col-sm-1 col-md-1 pager">
+                <p class="glyphicon glyphicon-plus-sign"></p>
+            </div>
+            <div id="regex" class="col-xs-3 col-sm-3 col-md-3">
+            	<div></div>
+				<div class="col-xs-2 col-sm-2 col-md-2"></div>
+  				<div class="col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-10 col-md-offset-2 col-md-10"><button type="button" class="btn btn-primary btn-sm btn-block">增加</button></div>
+            </div>
+            <div id="equals" class="col-xs-1 col-sm-1 col-md-1 pager">
+                <p class="glyphicon glyphicon-forward"></p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <textarea id="ret-text" class="form-control char-replace" rows="10" placeholder=" " expand-min-height="10em" style="height: 200px;"></textarea>
+            </div>
+		</div>
+</script>
+
+<script type="text/javascript" src="js/app/char-replace.js"></script>
+
+</body>
+</html>
