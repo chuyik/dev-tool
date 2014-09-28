@@ -1,1 +1,1 @@
-Demo: [github pages](http://chuyik.github.io/devtools)
+Demo: [github pages](http://chuyik.github.io/dev-tool)
